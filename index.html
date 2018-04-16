@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport">
+		<title>沙漏</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css?v=20170731"/>
+		<link rel="shortcut icon" href="images/logo.ico" type="image/x-icon"> 
+	</head>
+	<body>
+	<input type="hidden" name="taskID" id="taskId" value="">
+	<input type="hidden" name="memberID" id="memberId" value="">
+	<input type="hidden" name="progressId" id="progressId" value="">
+		<header class="clearfix">
+			<h1 class="logo fl"><a href="index.html">ShaLou</a></h1>
+			<div class="header-nav">
+				<nav id="nav">
+					<a href="#daka" class="on">计时</a>
+					<a href="#task">任务</a>
+					<a href="#member">成员</a>
+				</nav>
+				<button class="newTask button">新任务</button>
+			</div>
+		</header>
+		<div class="user">
+		</div>
+		<div class="con" id="app" v-cloak>
+			<div class="page active">
+				<div class="content-right">
+					<div class="box-my" style="display: none;">
+						<h2>我参与的任务</h2>
+						<ul class="clearfix taskList" id="myTaskList">
+						</ul>
+					</div>
+					<h2>全部任务</h2>
+					<ul class="ul1 active" id="taskList">
+						<li class="project common-li" :class="{'active':item.active,'active2':item.active2}" v-for="(item,index) in ProjectList" @mouseover=showProjectInfo(item,$event) @mouseout=hideProjectInfo(item) ref=item.project>
+							<h3>{{item.project}}</h3>
+							<div class="info">
+								<ul class="taskList">
+									<li v-for="(task,i) in item.listProjectTask"><span class="fl">{{task.task_name}}</span><button class="button">开始</button> </li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="page li2">
+				<nav class="nav clearfix">
+					<span class="doing fl on" id="doing">执行中</span>
+					<span class="done fl" id="done">已完结</span>
+				</nav>
+
+				<div id="box" class="task-wrapper">
+					<ul class="proList active" id="doingList">
+
+					</ul>
+					<ul class="proList"  id="doneList"></ul>
+				</div>
+			</div>
+			<div class="page li3">
+				<ul class="member clearfix" id="memberList">
+				</ul>
+			</div>
+		</div>
+
+	<div class="mask"></div>
+	<div class="loginTab tab" id="loginTab">
+		<h2>登录</h2>
+		<input type="text" id="loginName" maxlength="5" placeholder="请输入你的真实姓名"/><br />
+		<input type="submit" class="button" value="提交"/>
+		<a href="javascript:;" class="close">&times;</a>
+	</div>
+
+	<div class="tab" id="editMemberTab">
+		<h2>修改成员名称</h2>
+		<input type="text" id="memberName" maxlength="5" placeholder="请输入姓名" value=""/><br />
+		<input type="hidden" id="memberId2" value="" /><br />
+		<input type="submit" class="button" value="修改"/>
+		<a href="javascript:;" class="close">&times;</a>
+	</div>
+
+	<div class="newtaskTab tab" id="newtaskTab">
+		<h2>新任务/修改</h2>
+		<div class="input-box">
+			<input type="text" placeholder="新建项目，建议使用客户名称，例如“亲见”" maxlength="15" id="projectName" list="project">
+			<div class="triangle-box">
+				<span class="triangle"></span>
+			</div>
+		</div>
+		<!--<datalist id="project"></datalist>-->
+		<input type="text" placeholder="项目名称，如“UI设计”、“首页交互设计”" maxlength="15" id="taskName">
+		<input type="hidden" id="editTaskId">
+		<input type="submit" class="button" value="提交"/>
+		<a href="javascript:;" class="close">&times;</a>
+	</div>
+
+<!--	<div class="tab over" id="over">
+		<p>是否结束当前工作</p>
+		<input type="button" value="暂不结束"/>
+		<input type="submit" value="结束"/>
+	</div>-->
+	<div class="tab" id="log">
+		<h2>工作日志</h2>
+		<div class="log-title"><span class="pro-name">【项目名称】</span><span class="task-name">任务名称</span></div>
+		<div class="log-form">
+			<input name="" id="logInput" class="form-text" type="text" placeholder="输入要添加的工作日志内容" /><input type="submit" class="button" value="提交"/>
+		</div>
+		<div class="log-list">
+			<ul>
+
+			</ul>
+		</div>
+
+		<a href="javascript:;" class="close">&times;</a>
+	</div>
+
+	<div class="tab" id="proDetial">
+		<a href="javascript:;" class="close">&times;</a>
+		<h2>中国移动</h2>
+		<ul class="user-task"></ul>
+	</div>
+	
+	<div class="tab" id="memberWorkInfo" member-id=''>
+		<a href="javascript:;" class="close">&times;</a>
+		<h2>每日工作时间</h2>
+		<div class="name-box">
+			<span class="memberName"></span>
+			<div>
+				<input type="text" class="datepicker" value="" id="datepicker">
+				<span>至</span> 
+				<input type="text" class="datepicker" value="" id="datepicker2">
+				<button class="button">确定</button>
+			</div>
+		</div>
+		<div class="daysInfo">
+		</div>
+		<ul class="timeList">
+		</ul>
+	</div>
+    <script src="js/vue.min.js"></script>
+    <script src="js/vue-resource.js"></script>
+	<script src="js/main.js"></script>
+	</body>
+</html>
