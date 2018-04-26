@@ -34,7 +34,7 @@
 					</div>
 					<h2>全部任务</h2>
 					<ul class="ul1 active" id="taskList">
-						<li class="project common-li" :class="{'active':item.active,'active2':item.active2}" v-for="(item,index) in ProjectList" @mouseover=showProjectInfo(item,$event) @mouseout=hideProjectInfo(item) ref=item.project>
+						<li class="project common-li" :class="{'active':item.active,'active2':item.active2}" v-for="(item,index) in ProjectList" @mouseover.prevent=showProjectInfo(item,index) @mouseout.prevent=hideProjectInfo(item,index) ref=menuItem>
 							<h3>{{item.project}}</h3>
 							<div class="info">
 								<ul class="taskList">
